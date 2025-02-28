@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eLearning Website</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .hero {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .hero .btn {
+            background-color: #fff;
+            color: #007BFF;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .courses {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .course {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .course .btn {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .contact-form button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Popup Form Styles */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .popup input, .popup select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .popup button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #0056b3;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Welcome to eLearning</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <h2>Learn Anything Online</h2>
+        <p>Join our courses and improve your skills in English and Computer Science.</p>
+        <a href="#courses" class="btn">Explore Courses</a>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses">
+        <div class="course">
+            <h2>English Course</h2>
+            <p>Improve your English skills with our comprehensive course.</p>
+            <button class="btn" onclick="openEnglishForm()">Enroll Now</button>
+        </div>
+        <div class="course">
+            <h2>Computer Course</h2>
+            <p>Learn the basics of computer science and programming.</p>
+            <button class="btn" onclick="openComputerForm()">Enroll Now</button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-form">
+        <h2>Get in Touch</h2>
+        <form action="#" method="post">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 eLearning. All rights reserved.</p>
+    </footer>
+
+    <!-- English Enrollment Form -->
+    <div class="overlay" id="overlayEnglish"></div>
+    <div class="popup" id="englishEnrollmentForm">
+        <h2>Enroll in English Course</h2>
+        <form id="englishEnrollForm" action="https://formspree.io/f/xanqrqvn" method="POST">
+            <label for="englishName">Full Name:</label>
+            <input type="text" id="englishName" name="englishName" required>
+
+            <label for="englishEmail">Email:</label>
+            <input type="email" id="englishEmail" name="englishEmail" required>
+
+            <label for="englishPhone">Phone Number:</label>
+            <input type="tel" id="englishPhone" name="englishPhone" required>
+
+            <label for="englishLevel">Select English Level:</label>
+            <select id="englishLevel" name="englishLevel" required>
+                <option value="">Choose your level</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn" onclick="closeEnglishForm()">Close</button>
+        </form>
+    </div>
+
+    <!-- Computer Enrollment Form -->
+    <div class="overlay" id="overlayComputer"></div>
+    <div class="popup" id="computerEnrollmentForm">
+        <h2>Enroll in Computer Course</h2>
+        <form id="computerEnrollForm" action="https://formspree.io/f/xanqrqvn" method="POST">
+            <label for="computerName">Full Name:</label>
+            <input type="text" id="computerName" name="computerName" required>
+
+            <label for="computerEmail">Email:</label>
+            <input type="email" id="computerEmail" name="computerEmail" required>
+
+            <label for="computerPhone">Phone Number:</label>
+            <input type="tel" id="computerPhone" name="computerPhone" required>
+
+            <label for="computerCourse">Select Course:</label>
+            <select id="computerCourse" name="computerCourse" required>
+                <option value="">Choose a course</option>
+                <option value="basic">Basic Computer Skills</option>
+                <option value="programming">Programming Fundamentals</option>
+                <option value="web">Web Development</option>
+                <option value="data">Data Science</option>
+            </select>
+
+            <button type="submit" class="btn">Submit</button>
+            <button type="button" class="btn" onclick="closeComputerForm()">Close</button>
+        </form>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Function to open the English enrollment form
+        function openEnglishForm() {
+            document.getElementById('englishEnrollmentForm').style.display = 'block';
+            document.getElementById('overlayEnglish').style.display = 'block';
+        }
+
+        // Function to close the English enrollment form
+        function closeEnglishForm() {
+            document.getElementById('englishEnrollmentForm').style.display = 'none';
+            document.getElementById('overlayEnglish').style.display = 'none';
+        }
+
+        // Function to open the Computer enrollment form
+        function openComputerForm() {
+            document.getElementById('computerEnrollmentForm').style.display = 'block';
+            document.getElementById('overlayComputer').style.display = 'block';
+        }
+
+        // Function to close the Computer enrollment form
+        function closeComputerForm() {
+            document.getElementById('computerEnrollmentForm').style.display = 'none';
+            document.getElementById('overlayComputer').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
